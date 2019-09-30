@@ -11,7 +11,7 @@ public class Task2 {
     public static void main(String[] args) {
 //        Task2 ts = new Task2();
 //        ts.fourth();
-        fifth();
+        sixth();
     }
     public static void first_a(){
         int n =9874;
@@ -122,20 +122,24 @@ public class Task2 {
             e.printStackTrace();
         }
     }
-//    public static void third(){
-//        Scanner line = new Scanner(System.in);
-//        String str = line.nextLine();
-//        Stack<Character> stack = new Stack<>();
-//        boolean p = false;
-//        for (int i = 0; i < str.length(); i++) {
-//            if (str.charAt(i)!=']'|| str.charAt(i)!='}'|| str.charAt(i)!=')' || str.charAt(i)!='['|| str.charAt(i)!='{'|| str.charAt(i)!='('){
-//                stack.push(str.charAt(i));
-//            }
-//        }
-//
-//        if (p) System.out.println("Баланс скобок не нарушен");
-//        else System.out.println("Баланс скобок нарушен");
-//    }
+    public static void third(){
+        Scanner line = new Scanner(System.in);
+        String str = line.nextLine();
+        Stack<Character> stack = new Stack<>();
+        boolean p = false;
+        for (int i = 0; i < str.length(); i++) {
+            if (str.charAt(i)=='['|| str.charAt(i)=='{'|| str.charAt(i)=='('){
+                stack.push(str.charAt(i));
+            }
+            else if (stack.empty())break;
+            else if ((stack.peek()=='('&& str.charAt(i)==')' )||(stack.peek()=='['&& str.charAt(i)==']') || (stack.peek()=='{'&& str.charAt(i)=='}'))stack.pop();
+            else break;
+            p=true;
+        }
+        if (!stack.empty())p=false;
+        if (p) System.out.println("Баланс скобок не нарушен");
+        else System.out.println("Баланс скобок нарушен");
+    }
     public void fourth(){
         int f = M(m(3,5),M(2,1));
         System.out.println(f);
@@ -153,14 +157,35 @@ public class Task2 {
             BufferedReader bf = new BufferedReader( new FileReader("Data2_0.txt"));
             String line ;
             ArrayList<String> array = new ArrayList<>();
+            ArrayList<String> check = new ArrayList<>();
             while ((line=bf.readLine())!=null){
                 array.add(line);
             }
-//            Collections.sort(array.get(0),array.get(1));
+            array.sort((o1, o2) -> {
+                if (o1.length() != o2.length())
+                    return o1.length() - o2.length();
+                else
+                    return o1.compareTo(o2);
+            });
+            System.out.println(array);
             Collections.sort(array);
             System.out.println(array);
+            array.sort((o1, o2) -> {
+                int k = 0, l = 0;
+                for (int i = 0; i < o1.length(); i++) if (Character.isUpperCase(o1.charAt(i))) k++;
+                for (int i = 0; i < o2.length(); i++) if (Character.isUpperCase(o2.charAt(i))) l++;
+                if (k != l)
+                    return k-l;
+                else
+                    return o1.compareTo(o2);
+            });
+            System.out.println(array);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    public static void sixth(){
+
     }
 }
