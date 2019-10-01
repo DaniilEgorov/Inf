@@ -186,6 +186,14 @@ public class Task2 {
         }
     }
     public static void sixth(){
-
+        Task2_Plane plane = new Task2_Plane();
+        plane.add_point(1,1);
+        plane.add_point(-3,2);
+        plane.add_point(4,5);
+        plane.add_point(4,5);
+        plane.add_point(0,2);
+        plane.add_point(-2,-4);
+        plane.add_point(-2,-4);
+        System.out.println(plane.distance(2,4));
     }
 }
