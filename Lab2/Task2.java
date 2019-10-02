@@ -9,9 +9,7 @@ import java.util.*;
 
 public class Task2 {
     public static void main(String[] args) {
-//        Task2 ts = new Task2();
-//        ts.fourth();
-        sixth();
+        fourth();
     }
     public static void first_a(){
         int n =9874;
@@ -140,17 +138,23 @@ public class Task2 {
         if (p) System.out.println("Баланс скобок не нарушен");
         else System.out.println("Баланс скобок нарушен");
     }
-    public void fourth(){
-        int f = M(m(3,5),M(2,1));
-        System.out.println(f);
-    }
-    public int M(int a , int b){
-        if (a>b) return a;
-        else return b;
-    }
-    public int m(int a, int b){
-        if (a>b)return b;
-        else return a;
+    public static void fourth(){
+        String f ="m(M(3,m(6,9)),M(5,4))";
+        Stack<Character> stack = new Stack<>();
+        for (int i = 0; i < f.length(); i++) {
+            if (f.charAt(i)==')'){
+                int k = stack.pop();
+                int l = stack.pop();
+                stack.pop();
+                if(stack.pop()=='M')
+                    if (l>k) stack.push((char)l);
+                    else stack.push((char)k);
+                else if (l<k) stack.push((char)l);
+                else stack.push((char)k);
+            }
+            else if(f.charAt(i)!=',') stack.push(f.charAt(i));
+        }
+        System.out.println(stack.pop());
     }
     public static void fifth(){
         try {
