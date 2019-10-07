@@ -55,15 +55,26 @@ public class Game {
         check();
     }
     public void check(){
-        boolean [][] array = new boolean[pole.length][pole.length];
-        if(Arrays.deepEquals(array,pole)) System.out.println("Все клетки погибли на "+arrayList.size()+" шаге");
-        else if (arrayList.size()>1 && pole == arrayList.get(arrayList.size()-2)) System.out.println("Игра вошла в стабильную конфигурацию на "+arrayList.size()+" шаге");
-        else if (arrayList.size()!=0 && arrayList.contains(pole)) {
-            System.out.println("Игра вошла в периодическую конфигурацию на "+arrayList.size()+" шаге");
-            System.out.println("Ранний шаг "+(arrayList.indexOf(pole)+1));
+        int i=0;
+        int k =arrayList.size()-1;
+        if (k>0 && Arrays.deepEquals(arrayList.get(k),pole)) {
+            System.out.println("Игра вошла в стабильную конфигурацию на "+arrayList.size()+" шаге");
         }
-        else {
-            System.out.println("Шаг "+arrayList.size());
+        else if(Arrays.deepEquals(pole,new boolean[pole.length][pole.length])){
+            System.out.println("Все клетки погибли на "+arrayList.size()+" шаге");
+        }
+        else{
+            for ( i = 0; i < arrayList.size(); i++) {
+                boolean [][] array =Arrays.copyOf(arrayList.get(i),arrayList.get(i).length);
+                if (k!=0 && Arrays.deepEquals(array,pole)) {
+                    System.out.println("Игра вошла в периодическую конфигурацию на "+arrayList.size()+" шаге");
+                    System.out.println("Ранний шаг "+i);
+                    break;
+                }
+            }
+        }
+        if (i==arrayList.size()){
+            System.out.println("Шаг "+i);
             arrayList.add(pole);
             step();
         }
